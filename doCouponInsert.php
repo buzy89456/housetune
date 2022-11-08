@@ -32,7 +32,7 @@ if (empty($end_date)) {
     exit;
 }
 
-$sql = "SELECT * FROM coupons WHERE coupon_name='$coupon_name' AND valid=1";
+$sql = "SELECT * FROM coupons WHERE coupon_name='$coupon_name'";
 $result = $conn->query($sql);
 $couponCount = $result->num_rows;
 if ($couponCount > 0) {
@@ -45,7 +45,12 @@ if (strtotime($start_date) > strtotime($end_date)) {
     exit;
 }
 
-$sqlInsert = "INSERT INTO coupons (coupon_name,discount,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,$min_expense,'$start_date','$end_date',1)";
+$now = time();
+if (strtotime($start_date) > $now) {
+    $sqlInsert = "INSERT INTO coupons (coupon_name,discount,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,$min_expense,'$start_date','$end_date',0)";
+} else {
+    $sqlInsert = "INSERT INTO coupons (coupon_name,discount,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,$min_expense,'$start_date','$end_date',1)";
+}
 
 if ($conn->query($sqlInsert) === true) {
     $last_id = $conn->insert_id;

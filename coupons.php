@@ -77,7 +77,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
         <div class="py-2 row justify-content-center">
             <div class="col-auto"><a href="add-coupon.php" class="btn btn-info">新增優惠券</a></div>
             <div class="col-auto"><a href="invalid-coupon.php" class="btn btn-info">更新優惠券</a></div>
-            <div class="col-auto"><a href="coupons-invalid.php" class="btn btn-danger">查看已失效優惠券</a></div>
+            <div class="col-auto"><a href="coupons-invalid.php" class="btn btn-danger">查看失效優惠券</a></div>
         </div>
         <div class="py-2">
             <form action="coupons.php" method="get">

@@ -177,6 +177,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     <th>最低花費</th>
                     <th>開始日期</th>
                     <th>結束日期</th>
+                    <th>狀態</th>
                     <th></th>
                 </tr>
             </thead>
@@ -190,6 +191,13 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                             <td><?= $row["min_expense"] ?></td>
                             <td><?= $row["start_date"] ?></td>
                             <td><?= $row["end_date"] ?></td>
+                            <td><?php $now = time();
+                                if (strtotime($row["end_date"]) < $now) {
+                                    echo "已過期";
+                                } else {
+                                    echo "即將上架";
+                                }
+                                ?></td>
                             <td>
                                 <a href="edit-couponInvalid.php?id=<?= $row["id"] ?>" class="btn btn-info">編輯</a>
                                 <a href="update-couponInvalid.php?id=<?= $row["id"] ?>" class="btn btn-danger">上架</a>

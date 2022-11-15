@@ -49,6 +49,16 @@ $row = $result->fetch_assoc();
                             <td><input type="number" class="form-control" name="discount" value="<?= $row["discount"] ?>"></td>
                         </tr>
                         <tr>
+                            <td>類型</td>
+                            <td>
+                                <select class="form-select" name="type">
+                                    <option disabled selected value="">請選擇優惠券類型</option>
+                                    <option value="滿額折扣">滿額折扣</option>
+                                    <option value="組合折扣">組合折扣</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>最低花費</td>
                             <td><input type="number" class="form-control" name="min_expense" value="<?= $row["min_expense"] ?>"></td>
                         </tr>

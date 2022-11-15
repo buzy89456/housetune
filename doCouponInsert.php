@@ -8,19 +8,17 @@ if (!isset($_POST["coupon_name"])) {
 
 $coupon_name = $_POST["coupon_name"];
 $discount = $_POST["discount"];
+$type = $_POST["type"];
 $min_expense = $_POST["min_expense"];
 $start_date = $_POST["start_date"];
 $end_date = $_POST["end_date"];
+
 if (empty($coupon_name)) {
     echo "請輸入優惠券名稱";
     exit;
 }
 if (empty($discount)) {
     echo "請輸入折扣";
-    exit;
-}
-if (empty($min_expense)) {
-    echo "請輸入最低花費";
     exit;
 }
 if (empty($start_date)) {
@@ -47,9 +45,9 @@ if (strtotime($start_date) > strtotime($end_date)) {
 
 $now = time();
 if (strtotime($start_date) > $now) {
-    $sqlInsert = "INSERT INTO coupons (coupon_name,discount,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,$min_expense,'$start_date','$end_date',0)";
+    $sqlInsert = "INSERT INTO coupons (coupon_name,discount,type,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,'$type',$min_expense,'$start_date','$end_date',0)";
 } else {
-    $sqlInsert = "INSERT INTO coupons (coupon_name,discount,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,$min_expense,'$start_date','$end_date',1)";
+    $sqlInsert = "INSERT INTO coupons (coupon_name,discount,type,min_expense,start_date,end_date,valid) VALUES ('$coupon_name',$discount,'$type',$min_expense,'$start_date','$end_date',1)";
 }
 
 if ($conn->query($sqlInsert) === true) {

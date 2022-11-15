@@ -5,6 +5,8 @@ if (isset($_GET["search"]) && $_GET["search"] != "") {
     $search = $_GET["search"];
 
     $sql = "SELECT * FROM coupons WHERE coupon_name LIKE '%$search%' OR discount LIKE '%$search%' AND valid=1";
+    $result = $conn->query($sql);
+    $couponsCount = $result->num_rows;
 } else if (isset($_GET["min"])) {
     $min = $_GET["min"];
     $max = $_GET["max"];
@@ -12,6 +14,8 @@ if (isset($_GET["search"]) && $_GET["search"] != "") {
     if (empty($min)) $min = 0;
     if (empty($max)) $max = 9999999;
     $sql = "SELECT * FROM coupons WHERE discount >= $min AND discount <=$max AND valid=1";
+    $result = $conn->query($sql);
+    $couponsCount = $result->num_rows;
 } else if (isset($_GET["expense_min"])) {
     $expense_min = $_GET["expense_min"];
     $expense_max = $_GET["expense_max"];
@@ -19,15 +23,21 @@ if (isset($_GET["search"]) && $_GET["search"] != "") {
     if (empty($expense_min)) $expense_min = 0;
     if (empty($expense_max)) $expense_max = 9999999;
     $sql = "SELECT * FROM coupons WHERE min_expense >= $expense_min AND min_expense <=$expense_max AND valid=1";
+    $result = $conn->query($sql);
+    $couponsCount = $result->num_rows;
 } else if (isset($_GET["date_start"])) {
     $date_start = $_GET["date_start"];
     $date_end = $_GET["date_end"];
 
     $sql = "SELECT * FROM coupons WHERE start_date >= '$date_start' AND end_date <= '$date_end' AND valid=1";
+    $result = $conn->query($sql);
+    $couponsCount = $result->num_rows;
 } else if (isset($_GET["sort_by"])) {
     $sort_by = $_GET["sort_by"];
     $order_by = $_GET["order_by"];
     $sql = "SELECT * FROM coupons  WHERE valid=1 ORDER BY $sort_by $order_by";
+    $result = $conn->query($sql);
+    $couponsCount = $result->num_rows;
 } else {
     if (isset($_GET["page"])) {
         $page = $_GET["page"];
@@ -44,8 +54,6 @@ if (isset($_GET["search"]) && $_GET["search"] != "") {
     $result = $conn->query($sql);
     $totalPage = ceil($couponsCount / $per_page);
 }
-$result = $conn->query($sql);
-$couponsCount = $result->num_rows;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!doctype html>
@@ -177,6 +185,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     <th>id</th>
                     <th>優惠券名稱</th>
                     <th>折扣</th>
+                    <th>類型</th>
                     <th>最低花費</th>
                     <th>
                         <div class="row align-items-end">
@@ -212,6 +221,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                             <td><?= $row["id"] ?></td>
                             <td><?= $row["coupon_name"] ?></td>
                             <td><?= $row["discount"] ?></td>
+                            <td><?= $row["type"] ?></td>
                             <td><?= $row["min_expense"] ?></td>
                             <td><?= $row["start_date"] ?></td>
                             <td><?= $row["end_date"] ?></td>

@@ -8,11 +8,12 @@ if (!isset($_POST["coupon_name"])) {
 $id = $_POST["id"];
 $coupon_name = $_POST["coupon_name"];
 $discount = $_POST["discount"];
+$type = $_POST["type"];
 $min_expense = $_POST["min_expense"];
 $start_date = $_POST["start_date"];
 $end_date = $_POST["end_date"];
 
-$sql = "UPDATE coupons SET coupon_name='$coupon_name',discount='$discount',min_expense='$min_expense',start_date='$start_date',end_date='$end_date' WHERE id='$id'";
+$sql = "UPDATE coupons SET coupon_name='$coupon_name',discount='$discount',type='$type',min_expense='$min_expense',start_date='$start_date',end_date='$end_date' WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "更新成功";

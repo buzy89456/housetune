@@ -27,6 +27,14 @@
                 <input type="number" class="form-control" name="discount">
             </div>
             <div class="mb-2">
+                <label for="type">類型</label>
+                <select class="form-select" name="type">
+                    <option disabled selected value="">請選擇優惠券類型</option>
+                    <option value="滿額折扣">滿額折扣</option>
+                    <option value="組合折扣">組合折扣</option>
+                </select>
+            </div>
+            <div class="mb-2">
                 <label for="min_expense">最低花費</label>
                 <input type="number" class="form-control" name="min_expense">
             </div>

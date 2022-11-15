@@ -175,6 +175,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     <th>id</th>
                     <th>優惠券名稱</th>
                     <th>折扣</th>
+                    <th>類型</th>
                     <th>最低花費</th>
                     <th>
                         <div class="row align-items-end">
@@ -211,6 +212,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                             <td><?= $row["id"] ?></td>
                             <td><?= $row["coupon_name"] ?></td>
                             <td><?= $row["discount"] ?></td>
+                            <td><?= $row["type"] ?></td>
                             <td><?= $row["min_expense"] ?></td>
                             <td><?= $row["start_date"] ?></td>
                             <td><?= $row["end_date"] ?></td>
